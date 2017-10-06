@@ -8,3 +8,7 @@ Provided XML Files:
 1. products.xml contains all available products
 2. update-01.xml contains current stock for all products
 3. update-02.xml contains an update for the product description
+
+Out of scope:
+- The service does not need to persist the data
+- API endpoint does not need to be protected
