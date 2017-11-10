@@ -1,14 +1,14 @@
-Please implement a service that reads the provided xml files and exposes the information via a RESTful API.
+Please implement a service that reads in the provided xml and json files and exposes the information via a RESTful API.
 
-The API should provide two endpoints:
-1. List all products with id, name and description
-2. Show one product with all available information including current stock
+File structure:
+- products.xml contains master data for all products.
+- prices.json contains price information for all products
 
-Provided XML Files:
-1. products.xml contains all available products
-2. update-01.xml contains current stock for all products
-3. update-02.xml contains an update for the product description
+The API should be designed in a way, that it allows the following use cases:
+1. List all products with their master data (name, description, sku)
+2. Show one product with master data and prices (name, description, sku, prices)
+3. Find current product price by unit (piece, package)
 
 Out of scope:
-- The service does not need to persist the data
-- API endpoint does not need to be protected
+- Persistence of data
+- Authentication/Authorization
