@@ -5,9 +5,9 @@ File structure:
 - prices.json contains price information for all products
 
 The API should be designed in a way, that it allows the following use cases:
-1. List all products with their master data (name, description, sku)
-2. Show one product with master data and prices (name, description, sku, prices)
-3. Find current product price by unit (piece, package)
+1. List all products with their master data
+2. Show one product with master data and prices
+3. Show only the current price of a product filtered by unit
 
 Out of scope:
 - Persistence of data
