@@ -6,8 +6,10 @@ File structure:
 
 The API should be designed in a way, that it allows the following use cases:
 1. List all products with their master data
-2. Show one product with master data and prices
-3. Show single product price filtered by unit
+2. Show single product with master data and all available prices
+3. Show single product price for one product and specific unit
+
+You can use external libraries.
 
 Out of scope:
 - Persistence of data
