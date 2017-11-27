@@ -11,6 +11,15 @@ class PricingService {
         return productPriceTto
     }
 
+    fun readPriceList(): Array<ProductPriceTto> {
+        val mapper = ObjectMapper()
+        return mapper.readValue(
+                pricesFile(),
+                mapper.typeFactory.constructArrayType(ProductPriceTto::class.javaObjectType)
+        )
+    }
+
+    private fun pricesFile() = javaClass.classLoader.getResource("products/prices.json")
 
 }
 

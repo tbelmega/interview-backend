@@ -48,5 +48,17 @@ class PricingServiceTest {
         assert(price2.price.currency == Currency.getInstance("EUR"))
     }
 
+    /**
+     * This test depends on the data in the resource file products/pricing.xml
+     */
+    @Test
+    fun testThat_PricingFile_IsParsedCorrectly() {
+        // act
+        val prices = PricingService().readPriceList()
+
+        // assert
+        assert(prices.size >= 6)
+    }
+
 
 }
