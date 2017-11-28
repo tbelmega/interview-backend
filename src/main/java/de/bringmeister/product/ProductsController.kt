@@ -18,7 +18,7 @@ class ProductsController {
 
 
     @GetMapping("/products/{id}", produces = arrayOf("application/json", "application/xml"))
-    fun getProductById(@PathVariable id: String): ProductTto? {
+    fun getProductById(@PathVariable id: String): ProductTto {
         return productService.findProductById(id)
     }
 

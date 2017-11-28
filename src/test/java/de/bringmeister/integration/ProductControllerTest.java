@@ -85,6 +85,21 @@ public class ProductControllerTest {
         assertThat(response.getStatusCode().value(), is(equalTo(Response.SC_OK)));
     }
 
+    @Test
+    public void testThat_GetByUnknownId_Returns404NotFound() throws Exception {
+
+        // arrange
+        String id = "some-non-existing-id";
+
+        // act
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/products/" + id),
+                HttpMethod.GET, entity, String.class);
+
+        // assert
+        assertThat(response.getStatusCode().value(), is(equalTo(Response.SC_NOT_FOUND)));
+    }
+
 
 
     private String createURLWithPort(String uri) {

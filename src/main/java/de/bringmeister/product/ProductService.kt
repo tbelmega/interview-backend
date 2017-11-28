@@ -2,11 +2,13 @@ package de.bringmeister.product
 
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import de.bringmeister.util.NotFoundException
 import org.springframework.stereotype.Component
 
 @Component
 class ProductService {
 
+    /** Read resource file and parse to ProductTto with Jackson Mapper. */
     fun readProductList(): Array<ProductTto> {
         val mapper = XmlMapper()
         return mapper.readValue(
@@ -15,23 +17,18 @@ class ProductService {
         )
     }
 
-    /**
-     * Find the products resource file on the class path.
-     */
+    /** Find the products resource file on the class path. */
     private fun productsFile() = javaClass.classLoader.getResource("products/products.xml")
 
     fun getAllProducts(): Array<ProductTto> {
         return readProductList()
     }
 
-    /**
-     * Find the product with the given ID.
-     * Return null if no product with the given ID exists.
-     */
-    fun findProductById(id: String): ProductTto? {
+
+    fun findProductById(id: String): ProductTto {
         for (product in readProductList())
             if (product.id == id) return product
-        return null
+        throw NotFoundException()
     }
 
 }
