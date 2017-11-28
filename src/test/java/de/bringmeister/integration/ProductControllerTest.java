@@ -43,7 +43,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testThat_GetRetrieves_BananaAndTomato() throws Exception {
+    public void testThat_GetAll_RetrievesBananaAndTomato() throws Exception {
 
         // act
         ResponseEntity<String> response = restTemplate.exchange(
@@ -53,12 +53,12 @@ public class ProductControllerTest {
 
         // assert
         List<String> productNames  = JsonPath.read(response.getBody(), "$..name");
-        assertThat(productNames, hasItem("Banana"));
+        assertThat(productNames, hasItem("Banana")); // see products.xml
         assertThat(productNames, hasItem("Tomato"));
     }
 
     @Test
-    public void testThat_GetReturns_200_OK() throws Exception {
+    public void testThat_GetAll_Returns200OK() throws Exception {
 
         // act
         ResponseEntity<String> response = restTemplate.exchange(
@@ -69,6 +69,23 @@ public class ProductControllerTest {
         // assert
         assertThat(response.getStatusCode().value(), is(equalTo(Response.SC_OK)));
     }
+
+    @Test
+    public void testThat_GetById_Returns200OK() throws Exception {
+
+        // arrange
+        String bananaId = "43b105a0-b5da-401b-a91d-32237ae418e4"; // see products.xml
+
+        // act
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/products/" + bananaId),
+                HttpMethod.GET, entity, String.class);
+
+        // assert
+        assertThat(response.getStatusCode().value(), is(equalTo(Response.SC_OK)));
+    }
+
+
 
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;

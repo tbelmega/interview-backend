@@ -15,10 +15,23 @@ class ProductService {
         )
     }
 
+    /**
+     * Find the products resource file on the class path.
+     */
     private fun productsFile() = javaClass.classLoader.getResource("products/products.xml")
 
     fun getAllProducts(): Array<ProductTto> {
         return readProductList()
+    }
+
+    /**
+     * Find the product with the given ID.
+     * Return null if no product with the given ID exists.
+     */
+    fun findProductById(id: String): ProductTto? {
+        for (product in readProductList())
+            if (product.id == id) return product
+        return null
     }
 
 }
