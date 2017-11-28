@@ -134,6 +134,22 @@ public class ProductControllerTest {
     }
 
 
+    @Test
+    public void testThat_GetByIdAndUnitPackage_ReturnsAPackagePrice() throws Exception {
+
+        // arrange
+        String bananaId = "43b105a0-b5da-401b-a91d-32237ae418e4"; // see products.xml
+
+        // act
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/products/" + bananaId + "/prices/package"),
+                HttpMethod.GET, entity, String.class);
+
+        // assert
+        String unit  = JsonPath.read(response.getBody(), "$.unit");
+        assertThat(unit, is(equalTo("package")));
+    }
+
 
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;

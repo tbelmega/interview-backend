@@ -11,9 +11,6 @@ import org.springframework.stereotype.Component
 @Component
 class ProductService () {
 
-    @Autowired
-    private lateinit var pricingService: PricingService
-
     /** Read resource file and parse to ProductEto with Jackson Mapper. */
     fun readProductList(): Array<ProductEto> {
         val mapper = XmlMapper()
@@ -30,13 +27,7 @@ class ProductService () {
         return readProductList().asList()
     }
 
-    fun findPricedProductById(id: String): PricedProductCto {
-        val product = findProductById(id)
-        val prices : List<PricePerUnitEto> = pricingService.getPricesBySku(product.sku)
-        return PricedProductCto(product, prices)
-    }
-
-    private fun findProductById(id: String): ProductEto {
+    fun findProductById(id: String): ProductEto {
         for (product in readProductList())
             if (product.id == id) return product
         throw NotFoundException()
