@@ -12,16 +12,17 @@ class ProductsController {
     lateinit var productService: ProductService
 
     @GetMapping("/products", produces = arrayOf("application/json", "application/xml"))
-    fun getAllProducts(): Array<ProductTto> {
+    fun getAllProducts(): List<ProductEto> {
         return productService.getAllProducts()
     }
 
 
     @GetMapping("/products/{id}", produces = arrayOf("application/json", "application/xml"))
-    fun getProductById(@PathVariable id: String): ProductTto {
-        return productService.findProductById(id)
+    fun getProductById(@PathVariable id: String): PricedProductCto {
+        return productService.findPricedProductById(id)
     }
 
 
 
 }
+

@@ -5,7 +5,10 @@ import java.math.BigDecimal
 import java.util.*
 
 
-data class PricePerUnitTto(val id: String, val price: Price, val unit: PricingUnit) {
+/**
+ * Entity transport object for a PricePerUnit entity.
+ */
+data class PricePerUnitEto(val id: String, val price: Price, val unit: PricingUnit) {
 
     /** Empty constructor for use by Jackson only, hence private */
     private constructor() : this("", Price(), PricingUnit.PIECE)

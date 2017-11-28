@@ -18,6 +18,7 @@ import static org.hamcrest.core.IsCollectionContaining.*;
 import static org.hamcrest.core.IsEqual.*;
 import static org.hamcrest.core.Is.*;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.core.StringContains.*;
 
 import java.util.List;
 
@@ -83,6 +84,38 @@ public class ProductControllerTest {
 
         // assert
         assertThat(response.getStatusCode().value(), is(equalTo(Response.SC_OK)));
+    }
+
+    @Test
+    public void testThat_GetById_ReturnsBanana() throws Exception {
+
+        // arrange
+        String bananaId = "43b105a0-b5da-401b-a91d-32237ae418e4"; // see products.xml
+
+        // act
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/products/" + bananaId),
+                HttpMethod.GET, entity, String.class);
+
+        // assert
+        String productName  = JsonPath.read(response.getBody(), "$.product.name");
+        assertThat(productName, is(equalTo("Banana")));
+    }
+
+    @Test
+    public void testThat_GetById_ReturnsPrices() throws Exception {
+
+        // arrange
+        String bananaId = "43b105a0-b5da-401b-a91d-32237ae418e4"; // see products.xml
+
+        // act
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/products/" + bananaId),
+                HttpMethod.GET, entity, String.class);
+
+        // assert
+        int numberOfPrices  = JsonPath.read(response.getBody(), "$.prices.length()");
+        assertThat(numberOfPrices, is(equalTo(2)));
     }
 
     @Test
