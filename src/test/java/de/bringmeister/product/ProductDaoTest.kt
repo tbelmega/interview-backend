@@ -2,7 +2,7 @@ package de.bringmeister.product
 
 import org.junit.Test
 
-class ProductServiceTest {
+class ProductDaoTest {
 
     /**
      * This test depends on the data in the resource file products/products.xml
@@ -10,7 +10,7 @@ class ProductServiceTest {
     @Test
     fun testThat_ProductsFile_IsParsedCorrectly() {
         // act
-        val products = ProductService().readProductList()
+        val products = ProductDao().readProductList()
 
         // assert
         assert(products.size >= 2)

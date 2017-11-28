@@ -4,7 +4,7 @@ import org.junit.Test
 import java.math.BigDecimal
 import java.util.*
 
-class PricingServiceTest {
+class PriceDaoTest {
 
     val priceString1 = "{\n" +
             "    \"id\": \"BA-01\",\n" +
@@ -27,7 +27,7 @@ class PricingServiceTest {
     @Test
     fun testThat_Price1_IsParsedCorrectly() {
         // act
-        val price1 = PricingService().parsePrice(priceString1)
+        val price1 = PriceDao().parsePrice(priceString1)
 
         // assert
         assert(price1.id == "BA-01")
@@ -39,7 +39,7 @@ class PricingServiceTest {
     @Test
     fun testThat_Price2_HasId_TO02() {
         // act
-        val price2 = PricingService().parsePrice(priceString2)
+        val price2 = PriceDao().parsePrice(priceString2)
 
         // assert
         assert(price2.id == "TO-02")
@@ -54,10 +54,10 @@ class PricingServiceTest {
     @Test
     fun testThat_PricingFile_IsParsedCorrectly() {
         // act
-        val prices = PricingService().readPriceList()
+        val prices = PriceDao().getAllPrices()
 
         // assert
-        assert(prices.size >= 6)
+        assert(prices.size == 6)
     }
 
 
